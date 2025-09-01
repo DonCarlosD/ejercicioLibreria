@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliotecas{% endblock %}
+
+{% block body %}
+
+    <h2>Lista de bibliotecas</h2>
+    <ul>
+        {% for biblioteca in bibliotecas %}
+            <li>{{ biblioteca.nombre }}
+                <a href="{{ path('app_biblioteca_by_id',{
+                    'id':biblioteca.id
+                }) }}">{{ biblioteca.id }}</a>
+                <a href="{{ path('app_update_biblioteca',{
+                    'id':biblioteca.id
+                }) }}"> Editar</a>
+                <a href="{{ path('app_delete_biblioteca',{
+                    'id':biblioteca.id
+                }) }}">Eliminar</a>
+            </li>
+            {{ biblioteca.calle }} {{ biblioteca.colonia }}
+            {{ biblioteca.tel }}
+        {% else %}
+            <li>No hay bibliotecas disponibles.</li>
+        {% endfor %}
+
+    </ul>
+{% endblock %}

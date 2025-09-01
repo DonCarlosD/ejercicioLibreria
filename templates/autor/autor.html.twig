@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Autores{% endblock %}
+
+{%block body %}
+
+    <h2>Lista de autores</h2>
+    <ul>
+        {% for autor in autores %}
+            <li>{{ autor.name }}
+                {{ autor.apellidoPaterno }}
+                <a href="{{ path('app_autor_by_id',{
+                    'id':autor.id}) }}">
+                    {{ autor.id }}</a>
+                <a href="{{ path('app_update_autor',{
+                    'id':autor.id
+                }) }}"> Editar</a>
+                <a href="{{ path('app_delete_autor',{
+                    'id':autor.id
+                }) }}"> Eliminar</a>
+            </li>
+        {% else %}
+            <li>No hay autores disponibles.</li>
+        {% endfor %}
+
+    </ul>
+{% endblock %}
