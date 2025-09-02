@@ -22,30 +22,5 @@ class homePageController extends  AbstractController
         ]);
     }
 
-    #[Route('/new-autor', name: 'app_new_autor')]
-    public function newAutor(Request $request, EntityManagerInterface $entityManager):Response
-    {
-        $autor = new Autor();
-        //crear el formulario
-        $form = $this->createForm(AutorType::class, $autor);
 
-        //manejar la peticion
-        $form->handleRequest($request);
-        //si el formulario es enviado y es valido
-        if($form->isSubmitted() && $form->isValid()){
-            //guardar el autor en la base de datos
-            $entityManager->persist($autor);
-            $entityManager->flush();
-
-            //enviar una notificacion flash
-            $this->addFlash('success','Autor creado con exito');
-            //redireccionar a la pagina de inicio
-            return $this->redirectToRoute('app_list_autors');
-        }
-
-        return $this->render('autor/newAutor.html.twig',[
-            'form' => $form->createView()
-        ]);
-
-    }
 }

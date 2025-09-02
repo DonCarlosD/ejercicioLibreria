@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{#detalles de biblioteca#}
+{% block title %}Detalles de la Biblioteca{% endblock %}
+
+{% block body %}
+    <h1>Detalles de la Biblioteca</h1>
+
+    <ul>
+        <li><strong>ID:</strong> {{ biblioteca.id }}</li>
+        <li><strong>Nombre:</strong> {{ biblioteca.nombre }}</li>
+        <li><strong>Ubicación:</strong> {{ biblioteca.calle }} {{ biblioteca.colonia }} {{ biblioteca.NO }}</li>
+    </ul>
+    <div>
+        <h2>Libros disponibles en esta biblioteca</h2>
+        <a href="{{ path('app_new_libro_biblioteca',{
+            'id': biblioteca.id
+        }) }}">Agregar Libro</a>
+        <table id="myTable" class="display">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Cantidad</th>
+                <th>Puntaje</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for libro in libros %}
+                <tr>
+                    <td>{{ libro.id }}</td>
+                    <td>{{ libro.libro.titulo }}</td>
+                    <td>{{ libro.libro.autor.name }}</td>
+                    <td>{{ libro.cantidad }}</td>
+                    <td>{{ libro.puntuacion }}</td>
+                    <td>
+                        <a>Ver</a>
+                        <a>Editar</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

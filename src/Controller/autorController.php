@@ -3,34 +3,49 @@
 namespace App\Controller;
 
 use App\Entity\Autor;
+use App\Form\AutorType;
 use App\Repository\AutorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class autorController extends  AbstractController
 {
 
-    #[Route('/autor/new', name:'app_new_autor')]
-    public function createAutor(EntityManagerInterface $entityManager): Response
+    #[Route('/new-autor', name: 'app_new_autor')]
+    public function newAutor(Request $request, EntityManagerInterface $entityManager):Response
     {
         $autor = new Autor();
-        $autor->setName('Gabriel');
-        $autor->setApellidoPaterno('García');
-        $autor->setApellidoMaterno('Márquez');
-        $autor->setFechaNac(new \DateTime('1927-03-06'));
-        $entityManager->persist($autor);
-        $entityManager->flush();
+        //crear el formulario
+        $form = $this->createForm(AutorType::class, $autor);
 
-        return new Response('Se guardo con exito el autor con id '.$autor->getId());
+        //manejar la peticion
+        $form->handleRequest($request);
+        //si el formulario es enviado y es valido
+        if($form->isSubmitted() && $form->isValid()){
+            //guardar el autor en la base de datos
+            $entityManager->persist($autor);
+            $entityManager->flush();
+
+            //enviar una notificacion flash
+            $this->addFlash('success','Autor creado con exito');
+            //redireccionar a la pagina de inicio
+            return $this->redirectToRoute('app_list_autors');
+        }
+
+        return $this->render('autor/newAutor.html.twig',[
+            'form' => $form->createView()
+        ]);
+
     }
 
     #[Route('/autors/', name:'app_list_autors')]
     public function show(AutorRepository $autorRepository)
     {
         $data = $autorRepository->findAll();
-        return $this->render('autor/autor.html.twig', [
+        return $this->render('autor/autores.html.twig', [
             'autores' => $data
         ]);
     }
@@ -41,15 +56,18 @@ class autorController extends  AbstractController
     {
             $findAutor= $autorRepository->find($id);
             if (!$findAutor) {
-                return new Response('No se encontro el autor con id '.$id);
-            } else {
-                return new Response('El autor con id '.$id.' es '.$findAutor->getName().' '.$findAutor->getApellidoPaterno().' '.$findAutor->getApellidoMaterno().', nacido el '.$findAutor->getFechaNac()->format('d-m-Y'));
+                throw $this->createNotFoundException(
+                    'No author found for id '.$id
+                );
             }
+            return $this->render('autor/autor.html.twig', [
+                'autor' => $findAutor
+            ]);
     }
 
 //    controlador que actualiza el autor por su id
     #[Route('/autor/update/{id}', name:'app_update_autor')]
-    public function updateAutor(EntityManagerInterface$entityManager, int $id): Response
+    public function updateAutor(Request $request,EntityManagerInterface$entityManager, int $id): Response
     {
         $findAutor= $entityManager->getRepository(Autor::class)->find($id);
         if (!$findAutor) {
@@ -57,14 +75,20 @@ class autorController extends  AbstractController
                 'No product found for id '.$id
             );
         }
-        $findAutor->setName('Mario');
-        $findAutor->setApellidoPaterno('Vargas');
-        $findAutor->setApellidoMaterno('Llosa');
-        $findAutor->setFechaNac(new \DateTime('1936-03-28'));
+        $form = $this->createForm(AutorType::class,$findAutor);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $findAutor = $form->getData();
+            $entityManager->persist($findAutor);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_list_autors');
+        }
 
-        $entityManager->flush();
 
-        return new Response('Se actualizo con exito el autor con id '.$findAutor->getId());
+        return $this->render('autor/editAutor.html.twig', [
+            'form' => $form->createView(),
+            'autor' => $findAutor
+        ]);
 
     }
 
@@ -80,7 +104,7 @@ class autorController extends  AbstractController
         }
             $entityManager->remove($foundAutor);
             $entityManager->flush();
-            return new Response('Se elimino con exito el autor con id '.$id);
+            return $this->redirectToRoute('app_list_autors');
 
     }
 }

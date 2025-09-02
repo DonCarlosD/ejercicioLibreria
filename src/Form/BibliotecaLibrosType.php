@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Biblioteca;
+use App\Entity\BibliotecaLibro;
+use App\Entity\Libro;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class BibliotecaLibrosType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('cantidad', TextType::class, [
+                'attr' => ['min' => 1],
+                'label' => 'Cantidad de libros',
+            ])
+            ->add('puntuacion', TextType::class, [
+                'attr' => ['min' => 1, 'max' => 5],
+                'label' => 'Puntuacion del libro (1-5)',
+            ])
+            ->add('biblioteca', EntityType::class, [
+                'class' => Biblioteca::class,
+                'choice_label' => 'id',
+                'disabled' => true,
+            ])
+            ->add('libro', EntityType::class, [
+                'class' => Libro::class,
+                'choice_label' => 'titulo',
+            ])
+            ->add('submit', SubmitType::class, [
+                'attr' => ['value' => 'Agregar Libro', 'class' => 'btn btn-primary'],
+                'label' => 'Guardar',
+            ])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => BibliotecaLibro::class,
+        ]);
+    }
+}

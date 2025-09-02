@@ -1,28 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Autores{% endblock %}
+{#detallrs de autor#}
+{% block title %}Detalles del Autor{% endblock %}
 
-{%block body %}
+{% block body %}
+    <h2>Detalles del Autor</h2>
+    <p><strong>Nombre:</strong> {{ autor.name }}</p>
+    <p><strong>Apellido Paterno:</strong> {{ autor.apellidoPaterno }}</p>
+    <p><strong>Apellido Materno:</strong> {{ autor.apellidoMaterno }}</p>
+    <p><strong>Fecha de Nacimiento:</strong> {{ autor.fechaNac ? autor.fechaNac|date('Y-m-d') : 'N/A' }}</p>
 
-    <h2>Lista de autores</h2>
-    <a href="{{ path('app_new_autor') }}">Crear nuevo autor</a>
-    <ul>
-        {% for autor in autores %}
-            <li>{{ autor.name }}
-                {{ autor.apellidoPaterno }}
-                <a href="{{ path('app_autor_by_id',{
-                    'id':autor.id}) }}">
-                    {{ autor.id }}</a>
-                <a href="{{ path('app_update_autor',{
-                    'id':autor.id
-                }) }}"> Editar</a>
-                <a href="{{ path('app_delete_autor',{
-                    'id':autor.id
-                }) }}"> Eliminar</a>
-            </li>
-        {% else %}
-            <li>No hay autores disponibles.</li>
-        {% endfor %}
 
-    </ul>
+
 {% endblock %}

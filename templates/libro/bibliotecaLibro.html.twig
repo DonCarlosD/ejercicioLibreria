@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{#formulario para agregar libro a biblioteca#}
+{% block title %}Agregar Libro a Biblioteca{% endblock %}
+
+{% block body %}
+    <h1>Agregar Libro a Biblioteca</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{#formulario para editar una biblioteca#}
+{% block title %}Editar Biblioteca{% endblock %}
+
+{% block body %}
+    <h1>Editar Biblioteca</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+
+{% endblock %}
