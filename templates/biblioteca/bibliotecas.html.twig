@@ -5,6 +5,7 @@
 {% block body %}
 
     <h2>Lista de bibliotecas</h2>
+    <a href="{{ path('app_new_biblioteca') }}"> Nueva biblioteca</a>
     <ul>
         {% for biblioteca in bibliotecas %}
             <li>{{ biblioteca.nombre }}

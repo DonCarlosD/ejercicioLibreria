@@ -3,27 +3,32 @@
 namespace App\Controller;
 
 use App\Entity\Biblioteca;
+use App\Form\BibliotecaType;
 use App\Repository\BibliotecaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class bibliotecaController extends AbstractController
 {
     #[Route('/biblioteca/new', name:'app_new_biblioteca')]
-    public function createBiblioteca(EntityManagerInterface $entityManager): Response
+    public function createBiblioteca(Request $request, EntityManagerInterface $entityManager): Response
     {
         $biblioteca = new Biblioteca();
-        $biblioteca->setNombre('Biblioteca Central');
-        $biblioteca->setCalle('Av. Siempre Viva');
-        $biblioteca->setColonia('Springfield');
-        $biblioteca->setNo('123');
-        $biblioteca->setCP('54321');
-        $biblioteca->setTel('555-1234');
-        $entityManager->persist($biblioteca);
-        $entityManager->flush();
-        return new Response('Se guardo con exito la biblioteca con id '.$biblioteca->getId());
+
+        $form= $this->createForm(BibliotecaType::class,$biblioteca);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($biblioteca);
+            $entityManager->flush();
+            $this->addFlash('success','Biblioteca creada con exito');
+            return $this->redirectToRoute('app_list_bibliotecas');
+        }
+        return $this->render('biblioteca/newBiblioteca.html.twig', [
+            'form' => $form->createView()
+        ]);
 
     }
 

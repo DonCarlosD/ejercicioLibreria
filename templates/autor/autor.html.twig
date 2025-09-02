@@ -5,6 +5,7 @@
 {%block body %}
 
     <h2>Lista de autores</h2>
+    <a href="{{ path('app_new_autor') }}">Crear nuevo autor</a>
     <ul>
         {% for autor in autores %}
             <li>{{ autor.name }}
