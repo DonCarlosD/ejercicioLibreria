@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Autor;
+use App\Entity\Libro;
 use App\Form\AutorType;
 use App\Repository\AutorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -52,16 +54,18 @@ class autorController extends  AbstractController
 
 //    controlador que devuelve un autor por su id
     #[Route('/autor/{id}', name:'app_autor_by_id')]
-    public function showAutorById(AutorRepository $autorRepository, int $id): Response
+    public function showAutorById(EntityManagerInterface $entityManager, int $id): Response
     {
-            $findAutor= $autorRepository->find($id);
+            $findAutor = $entityManager->getRepository(Autor::class)->find($id);
+            $libros = $entityManager->getRepository(Libro::class)->findBy(['autor' => $findAutor]);
             if (!$findAutor) {
                 throw $this->createNotFoundException(
                     'No author found for id '.$id
                 );
             }
             return $this->render('autor/autor.html.twig', [
-                'autor' => $findAutor
+                'autor' => $findAutor,
+                'libros' => $libros
             ]);
     }
 
@@ -93,18 +97,13 @@ class autorController extends  AbstractController
     }
 
 //    controller que elimina un autor por su id
-    #[Route ('/autor/delete/{id}', name:'app_delete_autor')]
-    public function delete(EntityManagerInterface $entityManager, int $id): Response
+    #[Route ('/autor/delete/{id}', name:'app_delete_autor', methods: ['POST'])]
+    public function delete(EntityManagerInterface $entityManager, Autor $autor): JsonResponse
     {
-        $foundAutor = $entityManager->getRepository(Autor::class)->find($id);
-        if (!$foundAutor) {
-            throw $this->createNotFoundException(
-                'No author found for id '.$id
-            );
-        }
-            $entityManager->remove($foundAutor);
+
+            $entityManager->remove($autor);
             $entityManager->flush();
-            return $this->redirectToRoute('app_list_autors');
+            return $this->json(['success' => true]);
 
     }
 }

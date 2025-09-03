@@ -11,6 +11,8 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+// importar estilos
+import './styles/app.css';
 
 console.log('Hello World!');
 
@@ -21,12 +23,14 @@ import DataTable from 'datatables.net-dt';
 function initDataTables() {
     document.querySelectorAll('table.display').forEach(table => {
         if (!table.classList.contains('dt-initialized')) {
-            new DataTable(table, {
+            const dt = new DataTable(table, {
                 language: {
                     emptyTable: 'No hay datos disponibles.'
                 }
             });
             table.classList.add('dt-initialized');
+            // Guardar instancia para acceso posterior
+            table._dt = dt;
         }
     });
 }

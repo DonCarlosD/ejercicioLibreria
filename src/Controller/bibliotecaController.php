@@ -81,15 +81,12 @@ class bibliotecaController extends AbstractController
 
 //    controlador que elimina una biblioteca por su id
     #[Route('/biblioteca/delete/{id}', name:'app_delete_biblioteca')]
-    public function delete(EntityManagerInterface $entityManager, int $id):Response
+    public function delete(EntityManagerInterface $entityManager, Biblioteca $biblioteca):Response
     {
-        $foundBiblioteca = $entityManager->getRepository(Biblioteca::class)->find($id);
-        if (!$foundBiblioteca) {
-            return new Response('No se encontró la biblioteca con id ' . $id);
-        }
-        $entityManager->remove($foundBiblioteca);
+
+        $entityManager->remove($biblioteca);
         $entityManager->flush();
-        return $this->redirectToRoute('app_list_bibliotecas');
+        return $this->json(['success' => true]);
     }
 
 }

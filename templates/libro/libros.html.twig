@@ -3,20 +3,21 @@
 {% block title %}Libros{% endblock %}
 
 {% block body %}
-    <h2>Nuestros libros</h2>
-    <a href="{{ path('app_new_libro') }}"> Nuevo libro</a>
+    <div class="m-5">
+        <h2>Nuestros libros</h2>
+        <a href="{{ path('app_new_libro') }}"> Nuevo libro</a>
 
 
-    <table id="myTable" class="display">
-        <thead>
+        <table id="myTable" class="display">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Título</th>
                 <th>Autor</th>
                 <th>Acciones</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% for libro in libros %}
                 <tr>
                     <td>{{ libro.id }}</td>
@@ -25,14 +26,21 @@
                     <td>
                         <a href="{{ path('app_show_libro', {'id': libro.id}) }}">Ver</a>
                         <a href="{{ path('app_edit_libro', {'id': libro.id}) }}">Editar</a>
-                        <form action="{{ path('app_delete_libro', {'id': libro.id}) }}" method="post" style="display:inline;">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?');">Eliminar</button>
-                        </form>
+                        <button
+                                class="btn btn-danger"
+                                data-controller="autor"
+                                data-action="autor#delete"
+                                data-autor-id-value="{{ libro.id }}"
+                                data-autor-url-value="{{ path('app_delete_libro', {'id': libro.id}) }}"
+                        >
+                            Eliminar
+                        </button>
                     </td>
                 </tr>
 
             {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+
 {% endblock %}

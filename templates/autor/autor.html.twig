@@ -4,12 +4,43 @@
 {% block title %}Detalles del Autor{% endblock %}
 
 {% block body %}
-    <h2>Detalles del Autor</h2>
-    <p><strong>Nombre:</strong> {{ autor.name }}</p>
-    <p><strong>Apellido Paterno:</strong> {{ autor.apellidoPaterno }}</p>
-    <p><strong>Apellido Materno:</strong> {{ autor.apellidoMaterno }}</p>
-    <p><strong>Fecha de Nacimiento:</strong> {{ autor.fechaNac ? autor.fechaNac|date('Y-m-d') : 'N/A' }}</p>
+    <div class="m-5">
 
+        <h2>Detalles del Autor</h2>
+        <p><strong>Nombre:</strong> {{ autor.name }}</p>
+        <p><strong>Apellido Paterno:</strong> {{ autor.apellidoPaterno }}</p>
+        <p><strong>Apellido Materno:</strong> {{ autor.apellidoMaterno }}</p>
+        <p><strong>Fecha de Nacimiento:</strong> {{ autor.fechaNac ? autor.fechaNac|date('Y-m-d') : 'N/A' }}</p>
+
+        {#ver los libros que ha realizado el autor por tabla#}
+        <h3>Libros del Autor</h3>
+        {% if autor.libros is not empty %}
+            <table id="myTable" class="display">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Título</th>
+                    <th>ISBN</th>
+                    <th>Año de Publicación</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for libro in autor.libros %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ libro.titulo }}</td>
+                        <td>{{ libro.isbn }}</td>
+                        <td>{{ libro.noPaginas }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Este autor no tiene libros asociados.</p>
+        {% endif %}
+
+    </div>
 
 
 {% endblock %}
+

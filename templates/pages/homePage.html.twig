@@ -1,13 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Página de Inicio{% endblock %}
-
 {% block body %}
+<div class="m-5">
     <h2>Explora nuestras características</h2>
     <p>Descubre lo que ofrecemos y cómo podemos ayudarte a alcanzar tus objetivos.</p>
-    <a href="{{ path('app_list_autors') }}">Autores</a>
-    <br>
-    <a href="{{ path('app_list_bibliotecas') }}">Bibliotecas</a>
-    <br>
-    <a href="{{ path('app_list_libros') }}">Libros</a>
+    {#    card de autores #}
+    <div class="d-flex gap-3 justify-content-center">
+        <div class="card" style="width: 18rem;">
+            <a href="{{ path('app_list_autors') }}" class="card-body">
+                <h5 class="card-title  d-flex justify-content-center">Autores</h5>
+
+            </a>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <a href="{{ path('app_list_bibliotecas') }}" class="card-body">
+                <h5 class="card-title title  d-flex justify-content-center">Biblitecas</h5>
+
+            </a>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <a href="{{ path('app_list_libros') }}" class="card-body">
+                <h5 class="card-title title  d-flex justify-content-center">Libros</h5>
+
+            </a>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

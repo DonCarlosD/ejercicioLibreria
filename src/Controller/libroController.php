@@ -53,11 +53,13 @@ class libroController extends AbstractController
     }
 
     #[Route('/libro/{id}', name: 'app_show_libro')]
-    public function showLibro(LibroRepository $libroRepository, int $id):Response
+    public function showLibro(EntityManagerInterface $entityManager, int $id):Response
     {
-        $libro= $libroRepository->find($id);
+        $libro= $entityManager->getRepository(Libro::class)->find($id);
+        $bibliotecas = $entityManager->getRepository(BibliotecaLibro::class)->findBy(['libro' => $libro]);
         return $this->render('libro/libro.html.twig', [
-            'libro' => $libro
+            'libro' => $libro,
+            'bibliotecas' => $bibliotecas
         ]);
     }
 
@@ -81,18 +83,15 @@ class libroController extends AbstractController
     }
 
     #[Route('/libro/delete/{id}', name: 'app_delete_libro')]
-    public function deleteLibro(EntityManagerInterface $entityManager, int $id, LibroRepository $libroRepository):Response
+    public function deleteLibro(EntityManagerInterface $entityManager, Libro $libro):Response
     {
-        $libro= $entityManager->getRepository(Libro::class)->find($id);
 
-        if($libro){
+
+
             $entityManager->remove($libro);
             $entityManager->flush();
-            $this->addFlash('success', 'Libro eliminado con exito');
-        }else{
-            $this->addFlash('error', 'El libro no existe');
-        }
-        return $this->redirectToRoute('app_list_libros');
+            return $this->json(['success' => true]);
+
     }
 
 //    agregar libro a biblioteca
@@ -123,6 +122,17 @@ class libroController extends AbstractController
             'errors'=> $form->getErrors(true, false),
             'biblioteca' => $biblioteca
         ]);
+    }
+
+//    eliminar libro de biblioteca
+    #[Route('/libro/biblioteca/delete/{id}', name: 'app_delete_libro_biblioteca', methods:['POST'])]
+    public function deleteLibroBiblioteca(EntityManagerInterface $entityManager, BibliotecaLibro $bibliotecaLibro):Response
+    {
+
+            $entityManager->remove($bibliotecaLibro);
+            $entityManager->flush();
+            return $this->json(['success' => true]);
+
     }
 
 }

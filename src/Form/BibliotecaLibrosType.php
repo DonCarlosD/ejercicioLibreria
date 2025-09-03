@@ -18,25 +18,37 @@ class BibliotecaLibrosType extends AbstractType
     {
         $builder
             ->add('cantidad', TextType::class, [
-                'attr' => ['min' => 1],
+                'attr' => [
+                    'min' => 1,
+                    'class' => 'form-control'
+                ],
                 'label' => 'Cantidad de libros',
             ])
             ->add('puntuacion', TextType::class, [
-                'attr' => ['min' => 1, 'max' => 5],
+                'attr' => [
+                    'min' => 1,
+                    'max' => 5,
+                    'class' => 'form-control'
+                ],
                 'label' => 'Puntuacion del libro (1-5)',
             ])
             ->add('biblioteca', EntityType::class, [
                 'class' => Biblioteca::class,
                 'choice_label' => 'id',
                 'disabled' => true,
+                'attr' => ['class' => 'form-control']
             ])
             ->add('libro', EntityType::class, [
                 'class' => Libro::class,
                 'choice_label' => 'titulo',
+                'attr' => ['class' => 'form-control']
             ])
             ->add('submit', SubmitType::class, [
-                'attr' => ['value' => 'Agregar Libro', 'class' => 'btn btn-primary'],
+                'attr' => [
+                    'value' => 'Agregar Libro',
+                    'class' => 'btn btn-primary form-control'],
                 'label' => 'Guardar',
+
             ])
         ;
     }
