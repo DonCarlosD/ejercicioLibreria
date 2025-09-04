@@ -1,10 +1,13 @@
 {%extends 'base.html.twig' %}
 
-{% block title %}New Autor{% endblock %}
+{% block title %}Nuevo Autor{% endblock %}
 
 {% block body %}
-    <h1>Create new Autor</h1>
-
-    {{form_start(form) }}
-    {{ form_end(form) }}
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card p-4">
+            <h1 class="card-title text-center mb-4">Crear Nuevo Autor</h1>
+            {{ form_start(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

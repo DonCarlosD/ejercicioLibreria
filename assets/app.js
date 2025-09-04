@@ -18,7 +18,10 @@ console.log('Hello World!');
 
 //usar datables.net
 import 'datatables.net-dt/css/dataTables.dataTables.css';
-import DataTable from 'datatables.net-dt';
+import * as bootstrap from 'bootstrap';
+import DataTable from 'datatables.net-bs5';
+
+DataTable.use(bootstrap);
 
 function initDataTables() {
     document.querySelectorAll('table.display').forEach(table => {

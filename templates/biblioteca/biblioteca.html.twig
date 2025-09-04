@@ -14,9 +14,11 @@
         </ul>
         <div>
             <h2>Libros disponibles en esta biblioteca</h2>
-            <a href="{{ path('app_new_libro_biblioteca',{
+
+            <button type="button" class="btn btn-primary" onclick="location.href='{{ path('app_new_libro_biblioteca' ,{
                 'id': biblioteca.id
-            }) }}">Agregar Libro</a>
+            }) }}'">Agregar Libro</button>
+
             <table id="myTable" class="display">
                 <thead>
                 <tr>
@@ -37,8 +39,14 @@
                         <td>{{ libro.cantidad }}</td>
                         <td>{{ libro.puntuacion }}</td>
                         <td>
-                            <a href="{{ path('app_biblioteca_by_id', {'id': biblioteca.id}) }}">Ver</a>
-                            <a href="{{ path('app_update_biblioteca', {'id': biblioteca.id}) }}">Editar</a>
+                            <button type="button" class="btn btn-info" onclick="location.href='{{ path('app_show_libro', {
+                                'id': libro.libro.id
+                            }) }}'">Ver Libro</button>
+                            <button type="button" class="btn btn-warning" onclick="location.href='{{ path('app_update_biblioteca',{
+                                'id': biblioteca.id
+                            }) }}'">
+                                Editar
+                            </button>
                             <button
                                     class="btn btn-danger"
                                     data-controller="autor"

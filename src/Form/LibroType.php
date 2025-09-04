@@ -51,10 +51,14 @@ class LibroType extends AbstractType
             ->add('autor', EntityType::class, [
                 'class' => Autor::class,
                 'choice_label' => 'name',
+                'label' => 'Autor',
+                'attr' => ['class' => 'form-control'],
+                'placeholder' => 'Selecciona un autor',
+                'required' => true,
             ])
             ->add('sudmit', SubmitType::class, [
                 'label' => 'Guardar',
-                'attr' => ['class' => 'btn btn-primary mt-3'],
+                'attr' => ['class' => 'btn btn-primary w-100 mt-4'],
             ])
         ;
     }

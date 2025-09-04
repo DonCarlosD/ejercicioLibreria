@@ -34,14 +34,17 @@ class BibliotecaLibrosType extends AbstractType
             ])
             ->add('biblioteca', EntityType::class, [
                 'class' => Biblioteca::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nombre',
                 'disabled' => true,
                 'attr' => ['class' => 'form-control']
             ])
             ->add('libro', EntityType::class, [
                 'class' => Libro::class,
                 'choice_label' => 'titulo',
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'placeholder' => 'Seleccione un libro'
+
+
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [

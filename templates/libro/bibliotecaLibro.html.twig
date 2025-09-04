@@ -4,11 +4,11 @@
 {% block title %}Agregar Libro a Biblioteca{% endblock %}
 
 {% block body %}
-    <h1>Agregar Libro a Biblioteca</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-    {{ form_end(form) }}
-
-
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card p-4">
+            <h1 class="card-title text-center mb-4">Agregar libro</h1>
+            {{ form_start(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

@@ -2,9 +2,12 @@
 
 {% block title %}Página de Inicio{% endblock %}
 {% block body %}
-<div class="m-5">
-    <h2>Explora nuestras características</h2>
-    <p>Descubre lo que ofrecemos y cómo podemos ayudarte a alcanzar tus objetivos.</p>
+<div class="m-5 ">
+    <div class="text-center mb-4">
+        <h1>{{ 'bienvenida'|trans }}</h1>
+        <h2>Explora nuestras características</h2>
+        <p>Descubre lo que ofrecemos y cómo podemos ayudarte a alcanzar tus objetivos.</p>
+    </div>
     {#    card de autores #}
     <div class="d-flex gap-3 justify-content-center">
         <div class="card" style="width: 18rem;">

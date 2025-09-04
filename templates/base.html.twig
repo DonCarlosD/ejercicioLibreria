@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.locale }}">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -35,13 +35,17 @@
                         <a class="nav-link" href="{{ path('app_list_bibliotecas') }}">Biblioteca</a>
                     </li>
                 </ul>
+                <div class="mb-3 text-end">
+                    <a href="{{ path('change_locale', {'locale': 'es'}) }}">Español</a>
+                    <a href="{{ path('change_locale', {'locale': 'en'}) }}">English</a>
+                </div>
             </div>
         </div>
     </nav>
 
         {% block body %}{% endblock %}
-        <footer>
-            <p>© 2024 Mi Sitio Web. Todos los derechos reservados.</p>
+        <footer class="text-center">
+            <p>© 2025 Mi Sitio Web. Todos los derechos reservados.</p>
         </footer>
     </body>
 </html>

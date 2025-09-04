@@ -3,12 +3,11 @@
 {% block title %}Nuevo libro{% endblock %}
 
 {% block body %}
-    <h2>Crear nuevo libro</h2>
-    {% for error in errors %}
-        <div class="alert alert-danger">{{ error.message }}</div>
-    {% endfor %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-    <a href="{{ path('app_list_libros') }}">Volver a la lista de libros</a>
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card p-4">
+            <h1 class="card-title text-center mb-4">Crear Nuevo Libro</h1>
+            {{ form_start(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

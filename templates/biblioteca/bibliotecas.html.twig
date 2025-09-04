@@ -5,7 +5,8 @@
 {% block body %}
 <div class="m-5">
     <h2>Lista de bibliotecas</h2>
-    <a href="{{ path('app_new_biblioteca') }}"> Nueva biblioteca</a>
+
+    <button type="button" class="btn btn-primary" onclick="location.href='{{ path('app_new_biblioteca')}}'">Nueva Biblioteca</button>
     <table id="myTable" class="display">
         <thead>
         <tr>
@@ -26,8 +27,12 @@
                 <td>{{ biblioteca.colonia }}</td>
                 <td>{{ biblioteca.tel }}</td>
                 <td>
-                    <a href="{{ path('app_biblioteca_by_id', {'id': biblioteca.id}) }}">Ver</a>
-                    <a href="{{ path('app_update_biblioteca', {'id': biblioteca.id}) }}">Editar</a>
+                    <button type="button" class="btn btn-info" onclick="location.href='{{ path('app_biblioteca_by_id', {'id': biblioteca.id}) }}'">
+                        Ver
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="location.href='{{ path('app_update_biblioteca', {'id': biblioteca.id}) }}'">
+                        Editar
+                    </button>
                     <button
                             class="btn btn-danger"
                             data-controller="autor"

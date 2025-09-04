@@ -34,7 +34,7 @@ class AutorType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Guardar',
-                'attr' => ['class' => 'btn btn-primary']
+                'attr' => ['class' => 'btn btn-primary w-100 mt-4']
             ]);
         ;
     }

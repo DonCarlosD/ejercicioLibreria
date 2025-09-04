@@ -13,7 +13,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class homePageController extends  AbstractController
 {
-    #[Route ('/', name: 'app_homePage')]
+    #[Route ([
+        'es' => '/es',
+        'en' => '/en'
+    ], name: 'app_homePage')]
     public function homePage(): Response
     {
         $number = random_int(0, 100);

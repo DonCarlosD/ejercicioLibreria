@@ -7,14 +7,17 @@ export default class extends Controller {
         url: String
     }
 
+    // JavaScript
     delete(event) {
         event.preventDefault();
         if (confirm("¿Estás seguro de que quieres eliminar este dato?")) {
-            axios.post(this.urlValue, {}, {
-            })
+            axios.post(this.urlValue, {})
                 .then(response => {
                     if (response.data.success) {
-                        event.target.closest("tr").remove();
+                        const row = event.target.closest("tr");
+                        const table = row.closest('table');
+                        // Usar la instancia guardada en el DOM
+                        table._dt.row(row).remove().draw();
                     } else {
                         alert('No se pudo eliminar');
                     }
