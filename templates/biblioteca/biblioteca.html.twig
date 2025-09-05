@@ -5,29 +5,29 @@
 
 {% block body %}
     <div class="m-5">
-        <h1>Detalles de la Biblioteca</h1>
+        <h1>{{ 'detalles_biblioteca'| trans}}</h1>
 
         <ul>
             <li><strong>ID:</strong> {{ biblioteca.id }}</li>
-            <li><strong>Nombre:</strong> {{ biblioteca.nombre }}</li>
-            <li><strong>Ubicación:</strong> {{ biblioteca.calle }} {{ biblioteca.colonia }} {{ biblioteca.NO }}</li>
+            <li><strong>{{ 'nombre_biblioteca'|trans }}:</strong> {{ biblioteca.nombre }}</li>
+            <li><strong>{{'direccion' |trans}}:</strong> {{ biblioteca.calle }} {{ biblioteca.colonia }} {{ biblioteca.NO }}</li>
         </ul>
         <div>
-            <h2>Libros disponibles en esta biblioteca</h2>
+            <h2>{{ 'libros_disponibles'|trans }}</h2>
 
             <button type="button" class="btn btn-primary" onclick="location.href='{{ path('app_new_libro_biblioteca' ,{
                 'id': biblioteca.id
-            }) }}'">Agregar Libro</button>
+            }) }}'">{{ 'agregar_libro'|trans }}</button>
 
             <table id="myTable" class="display">
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Cantidad</th>
-                    <th>Puntaje</th>
-                    <th>Acciones</th>
+                    <th>{{ 'titulo' |trans }}</th>
+                    <th>{{ 'autor' |trans }}</th>
+                    <th>{{ 'cantidad' |trans}}</th>
+                    <th>{{ 'puntaje' | trans }}</th>
+                    <th>{{ 'acciones' |trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,11 +41,13 @@
                         <td>
                             <button type="button" class="btn btn-info" onclick="location.href='{{ path('app_show_libro', {
                                 'id': libro.libro.id
-                            }) }}'">Ver Libro</button>
-                            <button type="button" class="btn btn-warning" onclick="location.href='{{ path('app_update_biblioteca',{
-                                'id': biblioteca.id
                             }) }}'">
-                                Editar
+                                {{ 'ver'|trans }}
+                            </button>
+                            <button type="button" class="btn btn-warning" onclick="location.href='{{ path('app_edit_libro_biblioteca',{
+                                'id': libro.id
+                            }) }}'">
+                                {{ 'editar'|trans }}
                             </button>
                             <button
                                     class="btn btn-danger"
@@ -54,7 +56,7 @@
                                     data-autor-id-value="{{ libro.id }}"
                                     data-autor-url-value="{{ path('app_delete_libro_biblioteca', {'id': libro.id}) }}"
                             >
-                                Eliminar
+                                {{ 'eliminar'|trans }}
                             </button>
 
                         </td>

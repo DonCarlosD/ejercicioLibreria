@@ -24,25 +24,25 @@ class LibroType extends AbstractType
                     'class' => 'form-control'],
             ])
             ->add('titulo',TextType::class,[
-                'label' => 'Título',
+                'label' => 'titulo',
                 'attr' => [
                     'maxlength' => 255,
                     'class' => 'form-control'],
             ])
             ->add('editorial',TextType::class,[
-                'label' => 'Editorial',
+                'label' => 'editorial',
                 'attr' => [
                     'maxlength' => 255,
                     'class' => 'form-control'],
             ])
             ->add('noPaginas',TextType::class,[
-                'label' => 'Número de Páginas',
+                'label' => 'no_paginas',
                 'attr' => [
                     'maxlength' => 5,
                     'class' => 'form-control'],
             ])
             ->add('sinopsis',TextareaType::class,[
-                'label' => 'Sinopsis',
+                'label' => 'sinopsis',
                 'attr' => [
                     'maxlength' => 1000,
                     'class' => 'form-control',
@@ -51,9 +51,9 @@ class LibroType extends AbstractType
             ->add('autor', EntityType::class, [
                 'class' => Autor::class,
                 'choice_label' => 'name',
-                'label' => 'Autor',
+                'label' => 'autor',
                 'attr' => ['class' => 'form-control'],
-                'placeholder' => 'Selecciona un autor',
+                'placeholder' => 'placeholder_libro',
                 'required' => true,
             ])
             ->add('sudmit', SubmitType::class, [

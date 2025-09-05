@@ -5,28 +5,27 @@
 <div class="m-5 ">
     <div class="text-center mb-4">
         <h1>{{ 'bienvenida'|trans }}</h1>
-        <h2>Explora nuestras características</h2>
-        <p>Descubre lo que ofrecemos y cómo podemos ayudarte a alcanzar tus objetivos.</p>
+        <h2>{{ 'descripcion' |trans }}</h2>
     </div>
     {#    card de autores #}
     <div class="d-flex gap-3 justify-content-center">
         <div class="card" style="width: 18rem;">
             <a href="{{ path('app_list_autors') }}" class="card-body">
-                <h5 class="card-title  d-flex justify-content-center">Autores</h5>
+                <h5 class="card-title  d-flex justify-content-center">{{ 'autores' |trans}}</h5>
 
             </a>
         </div>
 
         <div class="card" style="width: 18rem;">
             <a href="{{ path('app_list_bibliotecas') }}" class="card-body">
-                <h5 class="card-title title  d-flex justify-content-center">Biblitecas</h5>
+                <h5 class="card-title title  d-flex justify-content-center">{{ 'bibliotecas' |trans }}</h5>
 
             </a>
         </div>
 
         <div class="card" style="width: 18rem;">
             <a href="{{ path('app_list_libros') }}" class="card-body">
-                <h5 class="card-title title  d-flex justify-content-center">Libros</h5>
+                <h5 class="card-title title  d-flex justify-content-center">{{ 'libros' |trans }}</h5>
 
             </a>
         </div>

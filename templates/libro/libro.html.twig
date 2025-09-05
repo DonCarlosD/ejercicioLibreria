@@ -4,24 +4,25 @@
 
 {% block body %}
     <div class="m-5">
-        <h2>Detalles del libro</h2>
+        <h2>{{ 'detalle_libro' |trans }}</h2>
         <ul>
             <li><strong>ID:</strong> {{ libro.id }}</li>
-            <li><strong>Título:</strong> {{ libro.titulo }}</li>
+            <li><strong>{{ 'titulo'|trans }}:</strong> {{ libro.titulo }}</li>
             <li><strong>ISBN:</strong> {{ libro.isbn }}</li>
-            <li><strong>Autor:</strong> {{ libro.autor.name }} {{ libro.autor.apellidoPaterno }} {{ libro.autor.apellidoMaterno }}</li>
+            <li><strong>{{ 'autor'|trans }}:</strong> {{ libro.autor.name }} {{ libro.autor.apellidoPaterno }} {{ libro.autor.apellidoMaterno }}</li>
+            <li><strong>{{ 'sinopsis'|trans }}:</strong> {{ libro.sinopsis }}</li>
 
         </ul>
 
         {#    datatable que muestra las bibliotecas a las que pertenece#}
-        <h3>Bibliotecas que contienen este libro</h3>
+        <h3>{{ 'bibliotecas_con_libro'|trans }}</h3>
         <table id="myTable" class="display">
             <thead>
             <tr>
                 <th>No</th>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Dirección</th>
+                <th>{{ 'biblioteca.nombre'|trans }}</th>
+                <th>{{ 'direccion'|trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -34,7 +35,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="3">No hay bibliotecas que contengan este libro.</td>
+                    <td colspan="3">{{ mensaje_no_biblioteca }}</td>
                 </tr>
             {% endfor %}
             </tbody>

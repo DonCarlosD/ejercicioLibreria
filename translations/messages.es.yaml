@@ -1,1 +1,71 @@
 bienvenida: "¡Bienvenido a nuestro sitio web!"
+inicio: "Inicio"
+autores: "Autores"
+bibliotecas: "Bibliotecas"
+biblioteca: "Biblioteca"
+libros: "Libros"
+libro: "Libro"
+descripcion: "Explora nuestras características"
+footer: "2025 Mi Sitio Web. Todos los derechos reservados"
+
+#autores
+lista_autores: "Lista de Autores"
+agregar_autor: "Agregar Autor"
+nombre: "Nombre"
+apellido: "Apellidos"
+fecha_nacimiento: "Fecha de Nacimiento"
+libros_escritos: "Libros Escritos"
+detalle_autor: "Detalle del Autor"
+#formularo de autor
+autor.nombre: "Nombre"
+autor.apellido: "Apellido Paterno"
+autor.apellido_materno: "Apellido Materno"
+autor.fecha_nacimiento: "Fecha de Nacimiento"
+editar_autor: "Editar Autor"
+
+#biblioteca
+lista_bibliotecas: "Lista de Bibliotecas"
+agregar_biblioteca: "Agregar Biblioteca"
+nombre_biblioteca: "Nombre"
+calle: "Calle"
+colonia: "Colonia"
+telefono: "Teléfono"
+detalles_biblioteca: "Detalle de la Biblioteca"
+direccion: "Dirección"
+libros_disponibles: "Libros Disponibles"
+#formulario de biblioteca
+biblioteca.nombre: "Nombre"
+biblioteca.calle: "Calle"
+biblioteca.colonia: "Colonia"
+biblioteca.no: "No. Exterior"
+biblioteca.cp: "Código Postal"
+biblioteca.telefono: "Teléfono"
+editar_biblioteca: "Editar Biblioteca"
+
+
+#libro
+lista_libros: "Lista de Libros"
+titulo: "Título"
+isbn: "ISBN"
+paginas: "Páginas"
+agregar_libro: "Agregar Libro"
+autor: "Autor"
+cantidad: "Cantidad"
+puntaje: "Puntaje"
+detalle_libro: "Detalle del Libro"
+sinopsis: "Sinopsis"
+bibliotecas_con_libro: "Bibliotecas con este libro"
+mensaje_no_bibliotecas: "No hay bibliotecas que tengan este libro."
+editorial: "Editorial"
+no_paginas: "No. de Páginas"
+placeholder_libro: "Seleccionar un autor"
+editar_libro: "Editar Libro"
+agregar_a_biblioteca: "Agregar a Biblioteca"
+
+#opciones
+Acciones: "Acciones"
+ver: "Ver"
+editar: "Editar"
+eliminar: "Eliminar"
+
+

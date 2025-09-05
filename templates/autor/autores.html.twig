@@ -5,20 +5,19 @@
 {%block body %}
     <div class="m-5">
 
-        <h2>Lista de autores</h2>
+        <h2>{{ 'lista_autores'|trans }}</h2>
         <button type="button" class=" btn btn-primary" onclick="location.href='{{ path('app_new_autor') }}'">
-            Agregar Autor
+            {{ 'agregar_autor'| trans }}
         </button>
         <table id="myTable" class="display table table-striped">
             <thead>
             <tr>
                 <th>NO</th>
                 <th>Id</th>
-                <th>Nombre</th>
-                <th>Apellido Paterno</th>
-                <th>Apellido Materno</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Acciones</th>
+                <th>{{ 'nombre' |trans }}</th>
+                <th>{{ 'apellido'|trans }}</th>
+                <th>{{ 'fecha_nacimiento' |trans }}</th>
+                <th>{{ 'Acciones' | trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -27,16 +26,15 @@
                     <td>{{ loop.index }}</td>
                     <td>{{ autor.id }}</td>
                     <td>{{ autor.name }}</td>
-                    <td>{{ autor.apellidoPaterno }}</td>
-                    <td>{{ autor.apellidoMaterno }}</td>
+                    <td>{{ autor.apellidoPaterno }} {{ autor.apellidoMaterno }}</td>
                     <td>{{ autor.fechaNac ? autor.fechaNac|date('Y-m-d') : 'N/A' }}</td>
                     <td>
 
                         <button type="button" class=" btn btn-info" onclick="location.href='{{ path('app_autor_by_id', {'id': autor.id}) }}'">
-                            Ver
+                            {{ 'ver'|trans }}
                         </button>
                         <button type="button" class=" btn btn-warning" onclick="location.href='{{ path('app_update_autor', {'id': autor.id}) }}'">
-                            Editar
+                            {{ 'editar' |trans }}
                         </button>
                         <button
                                 class="btn btn-danger"
@@ -45,7 +43,7 @@
                                 data-autor-id-value="{{ autor.id }}"
                                 data-autor-url-value="{{ path('app_delete_autor', {'id': autor.id}) }}"
                         >
-                            Eliminar
+                            {{ 'eliminar' |trans}}
                         </button>
                     </td>
                 </tr>

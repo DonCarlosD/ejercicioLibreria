@@ -15,27 +15,27 @@ class BibliotecaType extends AbstractType
     {
         $builder
             ->add('nombre',TextType::class,[
-                'label' => 'Nombre de la Biblioteca',
+                'label' => 'biblioteca.nombre',
                 'attr' => ['class' => 'form-control'],
             ])
             ->add('calle', TextType::class,[
-                'label' => 'Calle',
+                'label' => 'biblioteca.calle',
                 'attr' => ['class' => 'form-control'],
             ])
             ->add('colonia', TextType::class,[
-                'label' => 'Colonia',
+                'label' => 'biblioteca.colonia',
                 'attr' => ['class' => 'form-control'],
             ])
             ->add('No', TextType::class,[
-                'label' => 'Número',
+                'label' => 'biblioteca.no',
                 'attr' => ['class' => 'form-control'],
             ])
             ->add('CP', TextType::class,[
-                'label' => 'Código Postal',
+                'label' => 'biblioteca.cp',
                 'attr' => ['class' => 'form-control'],
             ])
             ->add('tel', TextType::class,[
-                'label' => 'Teléfono',
+                'label' => 'biblioteca.telefono',
                 'attr' => ['class' => 'form-control'],
             ])
             ->add('submit', SubmitType::class, [

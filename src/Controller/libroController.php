@@ -136,5 +136,23 @@ class libroController extends AbstractController
     }
 
 //    editar el libro de la biblioteca
+    #[Route('/libro/biblioteca/edit/{id}', name: 'app_edit_libro_biblioteca')]
+    public function editLibroBiblioteca(Request $request,EntityManagerInterface $entityManager, BibliotecaLibro $bibliotecaLibro):Response
+    {
+
+        $form = $this->createForm(BibliotecaLibrosType::class, $bibliotecaLibro);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->flush();
+            $this->addFlash('success','Libro editado en la biblioteca con exito');
+            return $this->redirectToRoute('app_biblioteca_by_id', ['id' => $bibliotecaLibro->getBiblioteca()->getId()]);
+        }
+        return $this->render('libro/editBibliotecaLibro.html.twig', [
+            'form' => $form->createView(),
+            'errors'=> $form->getErrors(true, false),
+            'bibliotecaLibro' => $bibliotecaLibro
+        ]);
+
+    }
 
 }

@@ -4,31 +4,33 @@
 
 {% block body %}
     <div class="m-5">
-        <h2>Nuestros libros</h2>
+        <h2>{{ 'lista_libros' |trans }}</h2>
         <button type="button" class="btn btn-primary" onclick="location.href='{{ path('app_new_libro') }}'">
-            Nuevo libro
+            {{ 'agregar_libro' |trans }}
         </button>
         <table id="myTable" class="display">
             <thead>
             <tr>
+                <th>NO</th>
                 <th>Id</th>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Acciones</th>
+                <th>{{ 'titulo' |trans }}</th>
+                <th>{{ 'autor'|trans }}</th>
+                <th>{{ 'Acciones'|trans }}</th>
             </tr>
             </thead>
             <tbody>
             {% for libro in libros %}
                 <tr>
+                    <td>{{ loop.index }}</td>
                     <td>{{ libro.id }}</td>
                     <td>{{ libro.titulo }}</td>
                     <td>{{ libro.autor ? libro.autor.name ~ ' ' ~ libro.autor.apellidoPaterno : 'N/A' }}</td>
                     <td>
                         <button type="button" class="btn btn-info" onclick="location.href='{{ path('app_show_libro', {'id': libro.id}) }}'">
-                            Ver
+                            {{ 'ver'|trans }}
                         </button>
                         <button type="button" class="btn btn-warning" onclick="location.href='{{ path('app_edit_libro', {'id': libro.id}) }}'">
-                            Editar
+                            {{ 'editar'| trans }}
                         </button>
                         <button
                                 class="btn btn-danger"
@@ -37,7 +39,7 @@
                                 data-autor-id-value="{{ libro.id }}"
                                 data-autor-url-value="{{ path('app_delete_libro', {'id': libro.id}) }}"
                         >
-                            Eliminar
+                            {{ 'eliminar'|trans }}
                         </button>
                     </td>
                 </tr>

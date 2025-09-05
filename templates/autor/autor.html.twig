@@ -6,22 +6,21 @@
 {% block body %}
     <div class="m-5">
 
-        <h2>Detalles del Autor</h2>
-        <p><strong>Nombre:</strong> {{ autor.name }}</p>
-        <p><strong>Apellido Paterno:</strong> {{ autor.apellidoPaterno }}</p>
-        <p><strong>Apellido Materno:</strong> {{ autor.apellidoMaterno }}</p>
-        <p><strong>Fecha de Nacimiento:</strong> {{ autor.fechaNac ? autor.fechaNac|date('Y-m-d') : 'N/A' }}</p>
+        <h2>{{ 'detalle_autor' |trans }}</h2>
+        <p><strong>{{ 'nombre' |trans }}:</strong> {{ autor.name }}</p>
+        <p><strong>{{ 'apellido'|trans }} :</strong> {{ autor.apellidoPaterno }} {{ autor.apellidoMaterno }}</p>
+        <p><strong>{{ 'fecha_nacimiento'|trans }}:</strong> {{ autor.fechaNac ? autor.fechaNac|date('Y-m-d') : 'N/A' }}</p>
 
         {#ver los libros que ha realizado el autor por tabla#}
-        <h3>Libros del Autor</h3>
+        <h3>{{ 'libros_escritos' | trans }}</h3>
         {% if autor.libros is not empty %}
             <table id="myTable" class="display">
                 <thead>
                 <tr>
                     <th>No</th>
-                    <th>Título</th>
-                    <th>ISBN</th>
-                    <th>Año de Publicación</th>
+                    <th>{{'titulo'|trans}}</th>
+                    <th>{{ 'isbn'|trans }}</th>
+                    <th>{{'paginas'|trans}}</th>
                 </tr>
                 </thead>
                 <tbody>

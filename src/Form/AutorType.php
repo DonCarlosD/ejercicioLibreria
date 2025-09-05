@@ -16,21 +16,22 @@ class AutorType extends AbstractType
     {
         $builder
             ->add('name', TextType::class,[
-                'label' => 'Nombre',
+                'label' => 'autor.nombre',
                 'attr' => ['class' => 'form-control']
+
             ])
             ->add('apellidoPaterno', TextType::class,[
-                'label' => 'Apellido Paterno',
+                'label' => 'autor.apellido',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('apellidoMaterno', TextType::class,[
-                'label' => 'Apellido Materno',
+                'label' => 'autor.apellido_materno',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('fechaNac', DateType::class,[
-                'label' => 'Fecha de Nacimiento',
+                'label' => 'autor.fecha_nacimiento',
                 'widget' => 'single_text',
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Guardar',

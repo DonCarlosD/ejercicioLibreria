@@ -16,32 +16,27 @@
     <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Inicio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ path('app_homePage.' ~ app.locale) }}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{ path('app_homePage.' ~ app.locale) }}">{{ 'inicio'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_list_autors.'~ app.locale) }}">Autors</a>
+                        <a class="nav-link" href="{{ path('app_list_autors.'~ app.locale) }}">{{ 'autores'| trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_list_libros.'~ app.locale) }}">Libros</a>
+                        <a class="nav-link" href="{{ path('app_list_libros.'~ app.locale) }}">{{ 'libros'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_list_bibliotecas.'~ app.locale) }}">Biblioteca</a>
+                        <a class="nav-link" href="{{ path('app_list_bibliotecas.'~ app.locale) }}">{{ 'bibliotecas'|trans }}</a>
                     </li>
                 </ul>
                 <div class="flex items-center">
                     <div
                             data-controller="dropdown"
-                            class="mx-auto mr-2 relative"
+                            class="mx-auto mr-2 relative ps-4"
                     >
-
-
                         <a
                                 data-controller="lang-switch"
                                 data-action="click->lang-switch#switch"
@@ -58,7 +53,7 @@
 
         {% block body %}{% endblock %}
         <footer class="text-center">
-            <p>© 2025 Mi Sitio Web. Todos los derechos reservados.</p>
+            <p>{{ 'footer'|trans }}</p>
         </footer>
     </body>
 </html>

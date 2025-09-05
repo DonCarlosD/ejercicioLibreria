@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{#formulario para agregar libro a biblioteca#}
-{% block title %}{{ 'agregar_a_biblioteca'|trans }}{% endblock %}
-
+{#editar libro por formulario#}
+{% block title %}{{ 'editar_libro'|trans }}{% endblock %}
 {% block body %}
     <div class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="card p-4 w-25">
-            <h1 class="card-title text-center mb-4">{{ 'agregar_a_biblioteca'|trans }}</h1>
+            <h1 class="card-title text-center mb-4">{{ 'editar_libro'|trans }}</h1>
             {{ form_start(form) }}
             {{ form_end(form) }}
         </div>

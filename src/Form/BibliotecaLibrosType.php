@@ -22,7 +22,7 @@ class BibliotecaLibrosType extends AbstractType
                     'min' => 1,
                     'class' => 'form-control'
                 ],
-                'label' => 'Cantidad de libros',
+                'label' => 'cantidad',
             ])
             ->add('puntuacion', TextType::class, [
                 'attr' => [
@@ -30,19 +30,21 @@ class BibliotecaLibrosType extends AbstractType
                     'max' => 5,
                     'class' => 'form-control'
                 ],
-                'label' => 'Puntuacion del libro (1-5)',
+                'label' => 'puntaje',
             ])
             ->add('biblioteca', EntityType::class, [
                 'class' => Biblioteca::class,
                 'choice_label' => 'nombre',
                 'disabled' => true,
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'label' => 'biblioteca'
             ])
             ->add('libro', EntityType::class, [
                 'class' => Libro::class,
                 'choice_label' => 'titulo',
                 'attr' => ['class' => 'form-control'],
-                'placeholder' => 'Seleccione un libro'
+                'placeholder' => 'Seleccione un libro',
+                'label' => 'libro'
 
 
             ])
