@@ -1,11 +1,12 @@
-{%extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Nuevo Autor{% endblock %}
+{#formulario para agregar libro a biblioteca#}
+{% block title %}Agregar Libro a Biblioteca{% endblock %}
 
 {% block body %}
     <div class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="card p-4">
-            <h1 class="card-title text-center mb-4">Crear Nuevo Autor</h1>
+            <h1 class="card-title text-center mb-4">Agregar libro</h1>
             {{ form_start(form) }}
             {{ form_end(form) }}
         </div>

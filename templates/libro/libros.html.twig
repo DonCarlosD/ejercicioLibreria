@@ -1,0 +1,50 @@
+{%extends 'base.html.twig' %}
+
+{% block title %}Libros{% endblock %}
+
+{% block body %}
+    <div class="m-5">
+        <h2>Nuestros libros</h2>
+        <button type="button" class="btn btn-primary" onclick="location.href='{{ path('app_new_libro') }}'">
+            Nuevo libro
+        </button>
+        <table id="myTable" class="display">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for libro in libros %}
+                <tr>
+                    <td>{{ libro.id }}</td>
+                    <td>{{ libro.titulo }}</td>
+                    <td>{{ libro.autor ? libro.autor.name ~ ' ' ~ libro.autor.apellidoPaterno : 'N/A' }}</td>
+                    <td>
+                        <button type="button" class="btn btn-info" onclick="location.href='{{ path('app_show_libro', {'id': libro.id}) }}'">
+                            Ver
+                        </button>
+                        <button type="button" class="btn btn-warning" onclick="location.href='{{ path('app_edit_libro', {'id': libro.id}) }}'">
+                            Editar
+                        </button>
+                        <button
+                                class="btn btn-danger"
+                                data-controller="autor"
+                                data-action="autor#delete"
+                                data-autor-id-value="{{ libro.id }}"
+                                data-autor-url-value="{{ path('app_delete_libro', {'id': libro.id}) }}"
+                        >
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

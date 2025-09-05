@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{#detalles de biblioteca#}
+{% block title %}Detalles de la Biblioteca{% endblock %}
+
+{% block body %}
+    <div class="m-5">
+        <h1>Detalles de la Biblioteca</h1>
+
+        <ul>
+            <li><strong>ID:</strong> {{ biblioteca.id }}</li>
+            <li><strong>Nombre:</strong> {{ biblioteca.nombre }}</li>
+            <li><strong>Ubicación:</strong> {{ biblioteca.calle }} {{ biblioteca.colonia }} {{ biblioteca.NO }}</li>
+        </ul>
+        <div>
+            <h2>Libros disponibles en esta biblioteca</h2>
+
+            <button type="button" class="btn btn-primary" onclick="location.href='{{ path('app_new_libro_biblioteca' ,{
+                'id': biblioteca.id
+            }) }}'">Agregar Libro</button>
+
+            <table id="myTable" class="display">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Cantidad</th>
+                    <th>Puntaje</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for libro in libros %}
+                    <tr>
+                        <td>{{ libro.id }}</td>
+                        <td>{{ libro.libro.titulo }}</td>
+                        <td>{{ libro.libro.autor.name }}</td>
+                        <td>{{ libro.cantidad }}</td>
+                        <td>{{ libro.puntuacion }}</td>
+                        <td>
+                            <button type="button" class="btn btn-info" onclick="location.href='{{ path('app_show_libro', {
+                                'id': libro.libro.id
+                            }) }}'">Ver Libro</button>
+                            <button type="button" class="btn btn-warning" onclick="location.href='{{ path('app_update_biblioteca',{
+                                'id': biblioteca.id
+                            }) }}'">
+                                Editar
+                            </button>
+                            <button
+                                    class="btn btn-danger"
+                                    data-controller="autor"
+                                    data-action="autor#delete"
+                                    data-autor-id-value="{{ libro.id }}"
+                                    data-autor-url-value="{{ path('app_delete_libro_biblioteca', {'id': libro.id}) }}"
+                            >
+                                Eliminar
+                            </button>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+{% endblock %}

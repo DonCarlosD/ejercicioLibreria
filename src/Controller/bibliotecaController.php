@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Biblioteca;
 use App\Form\BibliotecaType;
+use App\Repository\BibliotecaLibroRepository;
 use App\Repository\BibliotecaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,42 +45,48 @@ class bibliotecaController extends AbstractController
 
 //    controlador que devuelve una biblioteca por su id
     #[Route('/biblioteca/{id}', name:'app_biblioteca_by_id')]
-    public function showBibliotecaById(BibliotecaRepository $bibliotecaRepository, int $id):Response
+    public function showBibliotecaById(BibliotecaRepository $bibliotecaRepository,BibliotecaLibroRepository $bibliotecaLibroRepository, int $id):Response
     {
         $findBiblioteca = $bibliotecaRepository->find($id);
         if (!$findBiblioteca) {
             return new Response('No se encontro la biblioteca con id '.$id);
-        } else {
-            return new Response('La biblioteca con id '.$id.' es '.$findBiblioteca->getNombre().', ubicada en '.$findBiblioteca->getCalle().' No. '.$findBiblioteca->getNo().', Colonia '.$findBiblioteca->getColonia().', CP '.$findBiblioteca->getCP().', Teléfono: '.$findBiblioteca->getTel());
         }
+        $bibliotecaLibros = $bibliotecaLibroRepository->findBy(['biblioteca' => $findBiblioteca]);
+        return $this->render('biblioteca/biblioteca.html.twig', [
+            'biblioteca' => $findBiblioteca,
+            'libros' => $bibliotecaLibros
+        ]);
+
 
     }
 
 //    controlador que actauliza una biblioteca por su id
     #[Route('/biblioteca/update/{id}', name:'app_update_biblioteca')]
-    public function update(EntityManagerInterface $entityManager, int $id):Response
+    public function update(Request $request,EntityManagerInterface $entityManager, int $id):Response
     {
         $foundBiblioteca = $entityManager->getRepository(Biblioteca::class)->find($id);
-        if (!$foundBiblioteca) {
-            return new Response('No se encontro la biblioteca con id '.$id);
-        }
-            $foundBiblioteca->setNombre('Biblioteca Actualizada'.$id);
+        $form = $this->createForm(BibliotecaType::class, $foundBiblioteca);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
             $entityManager->flush();
-            return new Response('Se actualizo con exito la biblioteca con id '.$id);
+            $this->addFlash('success','Biblioteca actualizada con exito');
+            return $this->redirectToRoute('app_list_bibliotecas');
+        }
+        return $this->render('biblioteca/editBiblioteca.html.twig', [
+            'form' => $form->createView(),
+            'biblioteca' => $foundBiblioteca
+        ]);
 
     }
 
 //    controlador que elimina una biblioteca por su id
     #[Route('/biblioteca/delete/{id}', name:'app_delete_biblioteca')]
-    public function delete(EntityManagerInterface $entityManager, int $id):Response
+    public function delete(EntityManagerInterface $entityManager, Biblioteca $biblioteca):Response
     {
-        $foundBiblioteca = $entityManager->getRepository(Biblioteca::class)->find($id);
-        if (!$foundBiblioteca) {
-            return new Response('No se encontró la biblioteca con id ' . $id);
-        }
-        $entityManager->remove($foundBiblioteca);
+
+        $entityManager->remove($biblioteca);
         $entityManager->flush();
-        return new Response('Se elimino con exito la biblioteca con id '.$id);
+        return $this->json(['success' => true]);
     }
 
 }

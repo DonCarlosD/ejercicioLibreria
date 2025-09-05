@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalles del libro{% endblock %}
+
+{% block body %}
+    <div class="m-5">
+        <h2>Detalles del libro</h2>
+        <ul>
+            <li><strong>ID:</strong> {{ libro.id }}</li>
+            <li><strong>Título:</strong> {{ libro.titulo }}</li>
+            <li><strong>ISBN:</strong> {{ libro.isbn }}</li>
+            <li><strong>Autor:</strong> {{ libro.autor.name }} {{ libro.autor.apellidoPaterno }} {{ libro.autor.apellidoMaterno }}</li>
+
+        </ul>
+
+        {#    datatable que muestra las bibliotecas a las que pertenece#}
+        <h3>Bibliotecas que contienen este libro</h3>
+        <table id="myTable" class="display">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for biblioteca in bibliotecas %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ biblioteca.id }}</td>
+                    <td>{{ biblioteca.biblioteca.nombre }}</td>
+                    <td>{{ biblioteca.biblioteca.calle }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">No hay bibliotecas que contengan este libro.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

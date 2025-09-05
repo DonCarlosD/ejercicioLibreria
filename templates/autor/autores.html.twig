@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Autores{% endblock %}
+
+{%block body %}
+    <div class="m-5">
+
+        <h2>Lista de autores</h2>
+        <button type="button" class=" btn btn-primary" onclick="location.href='{{ path('app_new_autor') }}'">
+            Agregar Autor
+        </button>
+        <table id="myTable" class="display table table-striped">
+            <thead>
+            <tr>
+                <th>NO</th>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for autor in autores %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ autor.id }}</td>
+                    <td>{{ autor.name }}</td>
+                    <td>{{ autor.apellidoPaterno }}</td>
+                    <td>{{ autor.apellidoMaterno }}</td>
+                    <td>{{ autor.fechaNac ? autor.fechaNac|date('Y-m-d') : 'N/A' }}</td>
+                    <td>
+
+                        <button type="button" class=" btn btn-info" onclick="location.href='{{ path('app_autor_by_id', {'id': autor.id}) }}'">
+                            Ver
+                        </button>
+                        <button type="button" class=" btn btn-warning" onclick="location.href='{{ path('app_update_autor', {'id': autor.id}) }}'">
+                            Editar
+                        </button>
+                        <button
+                                class="btn btn-danger"
+                                data-controller="autor"
+                                data-action="autor#delete"
+                                data-autor-id-value="{{ autor.id }}"
+                                data-autor-url-value="{{ path('app_delete_autor', {'id': autor.id}) }}"
+                        >
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
